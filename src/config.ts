@@ -6,19 +6,13 @@ export const KEYMAP = {
     'JUMP': [32],
 };
 
-
-
-
 export const PLAYER = {
   SPEED: {
       TERMINAL:35,
       FORWARD:15,
       BACKWARD:5,
       SIDE:5,
+      FLY:2,
       JUMP:25
   }
 };
-
-
-
-//export const DEBUG = true;

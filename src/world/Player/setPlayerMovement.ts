@@ -1,7 +1,7 @@
-import {subscribeKeys,SubscriberModes} from '../../../tools/keys';
+import {subscribeKeys,SubscriberModes} from './keys';
 import * as BABYLON from 'babylonjs';
 import Player from './index';
-import {KEYMAP,PLAYER} from '../../../config';
+import {KEYMAP,PLAYER} from '../../config';
 
 
 export default function setPlayerMovement(
@@ -29,12 +29,9 @@ export default function setPlayerMovement(
 
     });
 
-    subscribeKeys(KEYMAP.JUMP,SubscriberModes.FRAME,()=>{//PRESS
+    subscribeKeys(KEYMAP.JUMP,SubscriberModes.FRAME,()=>{
 
-        player.addMovement(new BABYLON.Vector3(0,PLAYER.SPEED.JUMP/10,0));
+        player.addMovement(new BABYLON.Vector3(0,PLAYER.SPEED.FLY,0));
 
     });
-
-
-
 }

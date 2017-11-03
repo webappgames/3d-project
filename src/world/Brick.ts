@@ -7,6 +7,7 @@ export default class Box{
 
     constructor(
         private _world:World,
+        private _materialName:string,
         private _size:BABYLON.Vector3,
         private _position:BABYLON.Vector3,
         private _rotation:BABYLON.Vector3 = BABYLON.Vector3.Zero(),
@@ -63,8 +64,14 @@ export default class Box{
             new BABYLON.Vector4(0, 0, depth / globalScale, width / globalScale),
         ];
         const meshOptions = {width, height, depth, faceUV};
-        this.mesh = BABYLON.MeshBuilder.CreateBox('BoxBrick', meshOptions, this.world.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateBox('BoxBrick', meshOptions, this._world.scene);
+
+        this.mesh.material = this._world.materialFactory.getMaterial(this._materialName);
+        this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
+            this.mesh,
+            BABYLON.PhysicsImpostor.BoxImpostor,
+            { mass: 100, restitution: 0.1},
+            this._world.scene
+        );
     }
 }
-
-

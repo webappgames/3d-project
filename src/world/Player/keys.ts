@@ -1,6 +1,3 @@
-//todo create class not singleton
-import log from './log';
-
 class Subscriber{
     constructor(public keyCodes:number[],public callback:Function){
     }
@@ -10,18 +7,11 @@ export enum SubscriberModes{
     PRESS, RELEASE, FRAME
 }
 
-
 const subscribersPress:Subscriber[] = [];
 const subscribersRelease:Subscriber[] = [];
 const subscribersFrame:Subscriber[] = [];
 
-
-
-
-
 const keysDown:number[] = [];
-
-
 
 function executeSubscribers(subscribers:Subscriber[],keyCode:number,execute=true):boolean{
 
@@ -31,69 +21,32 @@ function executeSubscribers(subscribers:Subscriber[],keyCode:number,execute=true
             if(execute)subscriber.callback.call(null);
             anySubsciberExecuted = true;
         }
-    })
+    });
 
     return anySubsciberExecuted;
-
 }
-
-
-
-
 
 window.addEventListener('keydown', function (event) {
         if (keysDown.indexOf(event.keyCode) === -1) {
             keysDown.push(event.keyCode);
             executeSubscribers(subscribersPress,event.keyCode)
-
-            //todo inly in debug mode
-            if(
-                !executeSubscribers(subscribersPress,event.keyCode,false) &&
-                !executeSubscribers(subscribersRelease,event.keyCode,false) &&
-                !executeSubscribers(subscribersFrame,event.keyCode,false)
-            ){
-                log.send('Pressed unknown key.',event.keyCode);
-            }
-
         }
 });
 
-
-
 window.addEventListener('keyup', function (event) {
-
-
-    var i = keysDown.indexOf(event.keyCode);
-
-
+    const i = keysDown.indexOf(event.keyCode);
     if (i != -1) {
         keysDown.splice(i, 1);
         executeSubscribers(subscribersRelease,event.keyCode);
     }
-
 });
 
-
-
 function frame(){
-
     keysDown.forEach((keyDownCode)=>executeSubscribers(subscribersFrame,keyDownCode));
-
-
     requestAnimationFrame(frame);
 }
 frame();
 
-
-
-/*
-export function isDown(keyCodes:number[]):boolean{
-    return false;
-}*/
-
-
-
-//todo unsubscribe
 export function subscribeKeys(keyCodes:number[],mode:SubscriberModes,callback:Function){
 
     switch(mode){
@@ -108,5 +61,3 @@ export function subscribeKeys(keyCodes:number[],mode:SubscriberModes,callback:Fu
             break;
     }
 }
-
-
