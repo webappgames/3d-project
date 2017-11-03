@@ -1,17 +1,8 @@
 import World from './world/World';
-//import * as React from 'react';
-//import * as ReactDOM from 'react-dom';
-//import Root from './components/Root';
-import UIDataModel from './ui-data-model';
+import './index.css';
 
-const canvasElement = document.getElementById("scene") as any;
-//const uiElement = document.getElementById("ui") as any;
+const canvasElement = document.getElementById("scene") as HTMLCanvasElement;
 
-const uiDataModel = new UIDataModel();
-new World(canvasElement, uiDataModel);
-
-/*ReactDOM.render(
-    <Root dataModel={uiDataModel}/>,
-    uiElement
-);*/
-
+const world = new World(canvasElement);
+world.run();
+console.log(world);

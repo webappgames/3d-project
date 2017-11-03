@@ -10,23 +10,24 @@ export default class WorldGenerator{
     generateWorld(){
 
         //----------------------------------Domino
-        for (let i = 0; i < 7; i++) {
+        /*for (let i = 0; i < 7; i++) {
 
             new Brick(
                 this.world,
                 'stone-plain',
+                {mass:500,restitution:0.4},
                 new BABYLON.Vector3(2,40,10),
                 new BABYLON.Vector3(i*25+50, 15, 100)
             );
-        }
+        }*/
         //----------------------------------
 
 
         //----------------------------------Building
-        const floors = 6;
+        const floors = 8;
         const size = new BABYLON.Vector3(50,10,50);
         const pillsInFloor = 5;
-        const pillsThick = 0.2;
+        const pillsThick = 0.25;
 
 
         const center = new BABYLON.Vector3(
@@ -40,6 +41,7 @@ export default class WorldGenerator{
             new Brick(
                 this.world,
                 'stone-plain',
+                {mass:100, restitution: 0.01},
                 new BABYLON.Vector3(size.x, 1, size.z),
                 center.add(new BABYLON.Vector3(0, floor * 10 + 9.5, 0))
             );
@@ -50,6 +52,7 @@ export default class WorldGenerator{
                     new Brick(
                         this.world,
                         'stone-plain',
+                        {mass:200, restitution: 0.01},
                         new BABYLON.Vector3(
                             size.x / pillsInFloor * pillsThick,
                             9,

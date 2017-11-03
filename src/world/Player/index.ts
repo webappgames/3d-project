@@ -3,14 +3,13 @@ import World from '../World';
 import createCamera from './createCamera';
 import setPlayerMouseLock from './setPlayerMouseLock';
 import setPlayerMovement from './setPlayerMovement';
-import setPlayerSpells from './setPlayerSpells';
+import setPlayerAction from './setPlayerAction';
 import {PLAYER} from '../../config';
 
 export default class Player {
 
     public mesh: BABYLON.AbstractMesh;
     public camera: BABYLON.FreeCamera;
-    public player: BABYLON.AbstractMesh;
 
     constructor(public world: World) {
 
@@ -38,9 +37,9 @@ export default class Player {
         });
 
 
-        setPlayerMouseLock(this.world.canvasElement, this.camera, this.world.uiDataModel);
+        setPlayerMouseLock(this.world.canvasElement, this.camera);
         setPlayerMovement(this);
-        setPlayerSpells(this);
+        setPlayerAction(this);
     }
 
     get direction(): BABYLON.Vector3 {

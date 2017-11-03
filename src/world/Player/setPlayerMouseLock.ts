@@ -1,11 +1,8 @@
-import DataModel from '../../ui-data-model';
 import * as BABYLON from 'babylonjs';
 
 export default function setPlayerMouseLock(
     canvasElement:HTMLCanvasElement,
-    camera:BABYLON.FreeCamera,
-    //onClick:(event:PointerEvent)=>void,
-    dataModel:DataModel
+    camera:BABYLON.FreeCamera
 ){
 
     //todo add event listener
@@ -28,14 +25,8 @@ export default function setPlayerMouseLock(
 
     function lockChangeAlert() {
         if(document.pointerLockElement === canvasElement) {
-            //The pointer lock status is now locked
-            dataModel.locked=true;
             document.addEventListener("mousemove", mouseMoveLocked, false);
-            //document.removeEventListener("mousemove", mouseMoveUnlocked, false);
         } else {
-            //The pointer lock status is now unlocked
-            dataModel.locked=false;
-            //document.addEventListener("mousemove", mouseMoveUnlocked, false);
             document.removeEventListener("mousemove", mouseMoveLocked, false);
         }
     }

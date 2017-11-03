@@ -1,6 +1,4 @@
 import * as BABYLON from 'babylonjs';
-import * as _ from "lodash";
-import UIDataModel from '../../ui-data-model';
 import MaterialFactory from "../MaterialFactory";
 import WorldGenerator from "../../generator";
 import Player from '../Player';
@@ -23,19 +21,15 @@ export default class World{
 
     constructor(
         public canvasElement: HTMLCanvasElement,
-        public uiDataModel:UIDataModel
     ){
+    }
 
+    run(){
         this.bricks=[];
         this.engine = new BABYLON.Engine(this.canvasElement, true);
 
-        const updateUIStat = _.throttle(()=>{
-            this.uiDataModel.stat.fps = this.engine.getFps();
-            this.uiDataModel.stat.meshes = this.scene.meshes.length;
-        },200);
         this.engine.runRenderLoop(()=>{
             this.scene.render();
-            updateUIStat();
         });
 
         window.addEventListener("resize", ()=>{
@@ -47,7 +41,7 @@ export default class World{
         this.materialFactory = new MaterialFactory(this.scene);
         this.player = new Player(this);
         this.skyboxMesh = createSkyboxMesh(this.scene);
-        this.groundMesh = createGroundMesh(this.scene);
+        this.groundMesh = createGroundMesh(this.scene,this.materialFactory);
 
         this.worldGenerator = new WorldGenerator(this);
         this.worldGenerator.generateWorld();

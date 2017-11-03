@@ -8,6 +8,7 @@ export default class Brick{
     constructor(
         private _world:World,
         private _materialName:string,
+        private _physicalProperties:{mass:number,restitution:number},
         private _size:BABYLON.Vector3,
         private _position:BABYLON.Vector3,
         private _rotation:BABYLON.Vector3 = BABYLON.Vector3.Zero(),
@@ -70,7 +71,7 @@ export default class Brick{
         this.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(
             this.mesh,
             BABYLON.PhysicsImpostor.BoxImpostor,
-            { mass: 100, restitution: 0.1},
+            this._physicalProperties,
             this._world.scene
         );
     }
