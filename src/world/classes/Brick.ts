@@ -1,0 +1,70 @@
+import * as BABYLON from 'babylonjs';
+import World from './World';
+
+
+export default class Box{
+    public mesh:BABYLON.AbstractMesh;
+
+    constructor(
+        private _world:World,
+        private _size:BABYLON.Vector3,
+        private _position:BABYLON.Vector3,
+        private _rotation:BABYLON.Vector3 = BABYLON.Vector3.Zero(),
+        private _linearVelocity:BABYLON.Vector3 = BABYLON.Vector3.Zero(),
+        private _angularVelocity:BABYLON.Vector3 = BABYLON.Vector3.Zero(),
+
+    ){
+        this.createBabylonMesh();
+        this._world.bricks.push(this);
+        this.mesh.position = this._position;
+        this.mesh.rotation = this._rotation;
+        this.mesh.physicsImpostor.setLinearVelocity(this._linearVelocity);
+        this.mesh.physicsImpostor.setAngularVelocity(this._angularVelocity);
+    }
+
+
+    get position():BABYLON.Vector3{
+        return this._position;
+    }
+
+    get rotation():BABYLON.Vector3{
+        return this.mesh.rotationQuaternion.toEulerAngles();
+    }
+
+    get linearVelocity():BABYLON.Vector3{
+        return this.mesh.physicsImpostor.getLinearVelocity();
+    }
+
+    get angularVelocity():BABYLON.Vector3{
+        return this.mesh.physicsImpostor.getAngularVelocity();
+    }
+
+    set linearVelocity(linearVelocity:BABYLON.Vector3){
+        this.mesh.physicsImpostor.setLinearVelocity(linearVelocity);
+    }
+
+    set angularVelocity(angularVelocity:BABYLON.Vector3){
+        this.mesh.physicsImpostor.setAngularVelocity(angularVelocity);
+    }
+
+    createBabylonMesh(){
+        const globalScale = 10;//todo from matrial
+        const width = this._size.x;
+        const height = this._size.y;
+        const depth = this._size.z;
+        const faceUV = [
+            new BABYLON.Vector4(0, 0, width / globalScale, height / globalScale),
+            new BABYLON.Vector4(0, 0, width / globalScale, height / globalScale),
+
+            new BABYLON.Vector4(0, 0, height / globalScale, depth / globalScale),
+            new BABYLON.Vector4(0, 0, height / globalScale, depth / globalScale),
+
+            new BABYLON.Vector4(0, 0, depth / globalScale, width / globalScale),
+            new BABYLON.Vector4(0, 0, depth / globalScale, width / globalScale),
+        ];
+        const meshOptions = {width, height, depth, faceUV};
+        this.mesh = BABYLON.MeshBuilder.CreateBox('BoxBrick', meshOptions, this.world.scene);
+    }
+}
+
+

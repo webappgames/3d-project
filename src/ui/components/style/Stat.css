@@ -1,0 +1,15 @@
+#stat{
+    z-index: 20;
+    position: fixed;
+    top: 135px;
+    right: 0;
+
+    text-align: right;
+    font-size: 0.8em;
+}
+
+
+#stat table{
+
+
+}
