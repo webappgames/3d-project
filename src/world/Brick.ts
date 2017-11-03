@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import World from './World';
 
 
-export default class Box{
+export default class Brick{
     public mesh:BABYLON.AbstractMesh;
 
     constructor(
@@ -49,7 +49,7 @@ export default class Box{
     }
 
     createBabylonMesh(){
-        const globalScale = 10;//todo from matrial
+        const globalScale = 10;
         const width = this._size.x;
         const height = this._size.y;
         const depth = this._size.z;
