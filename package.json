@@ -2,15 +2,20 @@
   "name": "3d-project",
   "version": "0.1.0",
   "private": false,
+  "homepage": "https://hejny.github.io/3d-project",
   "dependencies": {
     "@types/node": "^8.0.22",
     "babylonjs": "^3.0.1-alpha",
-    "react-scripts-ts": "2.6.0"
+    "react-scripts-ts": "2.6.0",
+    "gh-pages": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "deploy-from-cache": "gh-pages -d build"
   }
 }
