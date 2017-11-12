@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,OACI,kBACA,MACA,OACA,YACA,YAAc","file":"static/css/main.1569ddcf.css","sourcesContent":["#scene{\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n}\n\n\n// WEBPACK FOOTER //\n// ./src/index.css"],"sourceRoot":""}
