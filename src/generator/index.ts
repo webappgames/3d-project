@@ -35,12 +35,13 @@ export default class WorldGenerator{
 |:::|:::|
 |-------|
 |:::|:::|
----------
+-:::-----
 `;
 
         const building = GridBuilding.Building.fromFloorStrings([
             FLOOR1,
             FLOOR1,
+            FLOOR2,
             FLOOR2,
             FLOOR2,
         ]);
@@ -50,7 +51,7 @@ export default class WorldGenerator{
 
             new Brick(
                 this.world,
-                /*this._randomColor()*/'stone-bricks',
+                /*this._randomColor()*/'clay-bricks',
                 {mass:200, restitution: 0.001},
                 new BABYLON.Vector3(brick.size.x, brick.size.z, brick.size.y),
                 new BABYLON.Vector3(brick.center.x, brick.center.z, brick.center.y).add(center)

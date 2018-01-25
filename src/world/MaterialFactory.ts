@@ -27,6 +27,7 @@ export default class MaterialFactory{
 
             const material = new BABYLON.StandardMaterial(materialName, this._scene);
             const texture = new BABYLON.Texture(process.env.PUBLIC_URL +`/assets/textures/${materialName}.jpg`, this._scene);
+            material.backFaceCulling = false;
             texture.uScale = textureScale;
             texture.vScale = textureScale;
             material.diffuseTexture = texture;

@@ -1,19 +1,16 @@
 import * as BABYLON from 'babylonjs';
 
-export default function setPlayerMouseLock(
-    canvasElement:HTMLCanvasElement,
-    camera:BABYLON.FreeCamera
-){
+export default function setPlayerMouseLock(canvasElement: HTMLCanvasElement,
+                                           camera: BABYLON.FreeCamera) {
 
     //todo add event listener
     canvasElement.addEventListener("pointerdown",
-        (event)=>{
-            if(document.pointerLockElement !== canvasElement) {
+        (event) => {
+            if (document.pointerLockElement !== canvasElement) {
                 canvasElement.requestPointerLock();
             }
         }
         , false);
-
 
 
     //todo prevent spell creating when locking cursor
@@ -24,7 +21,7 @@ export default function setPlayerMouseLock(
     }
 
     function lockChangeAlert() {
-        if(document.pointerLockElement === canvasElement) {
+        if (document.pointerLockElement === canvasElement) {
             document.addEventListener("mousemove", mouseMoveLocked, false);
         } else {
             document.removeEventListener("mousemove", mouseMoveLocked, false);
@@ -32,19 +29,33 @@ export default function setPlayerMouseLock(
     }
 
     //todo to config
-    const cameraRotationXLimitMin = Math.PI * -.5*.9,
-        cameraRotationXLimitMax = Math.PI * 0.5*.9;
+    const cameraRotationAlphaLimitMin = Math.PI * -.5 * .9;
+    const cameraRotationAlphaLimitMax = Math.PI * 0.5 * .9;
 
-    function mouseMoveLocked(event:MouseEvent) {
-            const x = event.movementX,
-                  y = event.movementY;
-            const alpha = y/500,
-                  beta = x/500;
+    function mouseMoveLocked(event: MouseEvent) {
+        const x = event.movementX;
+        const    y = event.movementY;
+        let alpha = y / 1500;
+        let  beta = x / 1500;
 
-            camera.rotation.x += alpha;
-            camera.rotation.y += beta;
-            if(camera.rotation.x<cameraRotationXLimitMin)camera.rotation.x=cameraRotationXLimitMin;
-            if(camera.rotation.x>cameraRotationXLimitMax)camera.rotation.x=cameraRotationXLimitMax;
+        if (alpha < cameraRotationAlphaLimitMin) alpha = cameraRotationAlphaLimitMin;
+        if (alpha > cameraRotationAlphaLimitMax) alpha = cameraRotationAlphaLimitMax;
+        alpha;beta;
+
+        //camera.rotationQuaternion.x += alpha;
+        //camera.rotationQuaternion.w += beta;
+
+        camera.cameraRotation.x += alpha;
+        camera.cameraRotation.y += beta;
+
+
+        /*camera.rotationQuaternion = camera.rotationQuaternion
+            .add(BABYLON.Quaternion.RotationAxis(
+                new BABYLON.Vector3(1,0,0),alpha
+            ))
+            .add(BABYLON.Quaternion.RotationAxis(
+                    new BABYLON.Vector3(0,0,1),beta
+                ));*/
 
     }
 
