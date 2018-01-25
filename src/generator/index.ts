@@ -1,4 +1,5 @@
 import * as BABYLON from 'babylonjs';
+import * as GridBuilding from 'gridbuilding';
 import World from '../world/World';
 import Brick from '../world/Brick';
 
@@ -9,8 +10,60 @@ export default class WorldGenerator{
 
     generateWorld(){
 
+
+        //----------------------------------GridBuilding
+        const center = new BABYLON.Vector3(
+            0,
+            0,
+            50
+        ).add(new BABYLON.Vector3(
+            20,
+            0,
+            20
+        ));
+
+        const FLOOR1 = `       
++:::+:::+
+:::::::::
++:::+:::+
+:::::::::
++:::+:::+
+`;
+
+        const FLOOR2 = `       
+---------
+|:::|:::|
+|-------|
+|:::|:::|
+---------
+`;
+
+        const building = GridBuilding.Building.fromFloorStrings([
+            FLOOR1,
+            FLOOR1,
+            FLOOR2,
+            FLOOR2,
+        ]);
+
+        //this._randomColor;
+        building.getBricks().forEach((brick) => {
+
+            new Brick(
+                this.world,
+                /*this._randomColor()*/'stone-bricks',
+                {mass:200, restitution: 0.001},
+                new BABYLON.Vector3(brick.size.x, brick.size.z, brick.size.y),
+                new BABYLON.Vector3(brick.center.x, brick.center.z, brick.center.y).add(center)
+            );
+        });
+        //----------------------------------
+
+
+
+
         //----------------------------------Domino
-        /*for (let i = 0; i < 7; i++) {
+        /*
+        for (let i = 0; i < 7; i++) {
 
             new Brick(
                 this.world,
@@ -24,6 +77,7 @@ export default class WorldGenerator{
 
 
         //----------------------------------Building
+        /*
         const floors = 8;
         const size = new BABYLON.Vector3(50,10,50);
         const pillsInFloor = 5;
@@ -66,7 +120,7 @@ export default class WorldGenerator{
                     );
                 }
             }
-        }
+        }/**/
         //----------------------------------
 
     }
