@@ -21,6 +21,7 @@ export default function setPlayerMouseLock(canvasElement: HTMLCanvasElement,
     }
 
     function lockChangeAlert() {
+
         if (document.pointerLockElement === canvasElement) {
             document.addEventListener("mousemove", mouseMoveLocked, false);
         } else {
@@ -58,5 +59,6 @@ export default function setPlayerMouseLock(canvasElement: HTMLCanvasElement,
                 ));*/
 
     }
+    mouseMoveLocked;
 
 }
