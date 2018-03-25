@@ -1,8 +1,9 @@
 import * as BABYLON from 'babylonjs';
 
 export default function createCamera(scene:BABYLON.Scene):BABYLON.FreeCamera{
-    //const camera = new BABYLON.FreeCamera("FreeCamera", BABYLON.Vector3.Zero(),  scene);
-    const camera = new BABYLON.VRDeviceOrientationFreeCamera ("Camera",  BABYLON.Vector3.Zero(), scene);
+    const camera = new BABYLON.FreeCamera("FreeCamera", BABYLON.Vector3.Zero(),  scene);
+    camera.attachControl(scene.getEngine().getRenderingCanvas(),true);
+    //const camera = new BABYLON.VRDeviceOrientationFreeCamera ("Camera",  BABYLON.Vector3.Zero(), scene);
 
 
 

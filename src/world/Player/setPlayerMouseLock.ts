@@ -4,7 +4,7 @@ export default function setPlayerMouseLock(canvasElement: HTMLCanvasElement,
                                            camera: BABYLON.FreeCamera) {
 
     //todo add event listener
-    canvasElement.addEventListener("pointerdown",
+    canvasElement.addEventListener("mousedown",
         (event) => {
             if (document.pointerLockElement !== canvasElement) {
                 canvasElement.requestPointerLock();

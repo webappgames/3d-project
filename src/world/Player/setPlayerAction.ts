@@ -22,5 +22,5 @@ export default function setPlayerAction(
         );
     };
 
-    player.world.canvasElement.addEventListener("pointerdown",onPointerDown);
+    player.world.canvasElement.addEventListener("mousedown",onPointerDown);
 }
