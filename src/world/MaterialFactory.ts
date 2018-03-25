@@ -26,13 +26,19 @@ export default class MaterialFactory{
             }
 
             const material = new BABYLON.StandardMaterial(materialName, this._scene);
-            const texture = new BABYLON.Texture(process.env.PUBLIC_URL +`/assets/textures/${materialName}.jpg`, this._scene);
             material.backFaceCulling = false;
-            texture.uScale = textureScale;
-            texture.vScale = textureScale;
-            material.diffuseTexture = texture;
+
+            if(materialName!=='none') {
+                const texture = new BABYLON.Texture(process.env.PUBLIC_URL + `/assets/textures/${materialName}.jpg`, this._scene);
+                texture.uScale = textureScale;
+                texture.vScale = textureScale;
+                material.diffuseTexture = texture;
+                material.emissiveTexture = texture;
+            }
+
+
             material.specularColor = BABYLON.Color3.FromHexString('#ffeacb');
-            material.emissiveTexture = texture;
+
             this._materialsCache.push(material);
             return material;
         }
