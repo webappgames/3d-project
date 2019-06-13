@@ -21,9 +21,8 @@
     "gridbuilding": "^0.1.0",
     "react-scripts-ts": "2.6.0"
   },
-  "devDependencies":{
+  "devDependencies": {
     "onchange": "^5.0.2",
     "prettier": "^1.13.7"
   }
-  
 }
