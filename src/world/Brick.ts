@@ -1,21 +1,19 @@
 import * as BABYLON from 'babylonjs';
 import World from './World';
 
-
-export default class Brick{
-    public mesh:BABYLON.AbstractMesh;
+export default class Brick {
+    public mesh: BABYLON.AbstractMesh;
 
     constructor(
-        private _world:World,
-        private _materialName:string,
-        private _physicalProperties:{mass:number,restitution:number},
-        private _size:BABYLON.Vector3,
-        private _position:BABYLON.Vector3,
-        private _rotation:BABYLON.Vector3 = BABYLON.Vector3.Zero(),
-        private _linearVelocity:BABYLON.Vector3 = BABYLON.Vector3.Zero(),
-        private _angularVelocity:BABYLON.Vector3 = BABYLON.Vector3.Zero(),
-
-    ){
+        private _world: World,
+        private _materialName: string,
+        private _physicalProperties: { mass: number; restitution: number },
+        private _size: BABYLON.Vector3,
+        private _position: BABYLON.Vector3,
+        private _rotation: BABYLON.Vector3 = BABYLON.Vector3.Zero(),
+        private _linearVelocity: BABYLON.Vector3 = BABYLON.Vector3.Zero(),
+        private _angularVelocity: BABYLON.Vector3 = BABYLON.Vector3.Zero(),
+    ) {
         this.createBabylonMesh();
         this._world.bricks.push(this);
         this.mesh.position = this._position;
@@ -24,32 +22,31 @@ export default class Brick{
         this.mesh.physicsImpostor.setAngularVelocity(this._angularVelocity);
     }
 
-
-    get position():BABYLON.Vector3{
+    get position(): BABYLON.Vector3 {
         return this._position;
     }
 
-    get rotation():BABYLON.Vector3{
+    get rotation(): BABYLON.Vector3 {
         return this.mesh.rotationQuaternion.toEulerAngles();
     }
 
-    get linearVelocity():BABYLON.Vector3{
+    get linearVelocity(): BABYLON.Vector3 {
         return this.mesh.physicsImpostor.getLinearVelocity();
     }
 
-    get angularVelocity():BABYLON.Vector3{
+    get angularVelocity(): BABYLON.Vector3 {
         return this.mesh.physicsImpostor.getAngularVelocity();
     }
 
-    set linearVelocity(linearVelocity:BABYLON.Vector3){
+    set linearVelocity(linearVelocity: BABYLON.Vector3) {
         this.mesh.physicsImpostor.setLinearVelocity(linearVelocity);
     }
 
-    set angularVelocity(angularVelocity:BABYLON.Vector3){
+    set angularVelocity(angularVelocity: BABYLON.Vector3) {
         this.mesh.physicsImpostor.setAngularVelocity(angularVelocity);
     }
 
-    createBabylonMesh(){
+    createBabylonMesh() {
         const globalScale = 10;
         const width = this._size.x;
         const height = this._size.y;
@@ -64,7 +61,7 @@ export default class Brick{
             new BABYLON.Vector4(0, 0, depth / globalScale, width / globalScale),
             new BABYLON.Vector4(0, 0, depth / globalScale, width / globalScale),
         ];
-        const meshOptions = {width, height, depth, faceUV};
+        const meshOptions = { width, height, depth, faceUV };
         this.mesh = BABYLON.MeshBuilder.CreateBox('BoxBrick', meshOptions, this._world.scene);
 
         this.mesh.material = this._world.materialFactory.getMaterial(this._materialName);
@@ -72,7 +69,7 @@ export default class Brick{
             this.mesh,
             BABYLON.PhysicsImpostor.BoxImpostor,
             this._physicalProperties,
-            this._world.scene
+            this._world.scene,
         );
     }
 }
