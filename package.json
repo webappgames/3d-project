@@ -3,13 +3,6 @@
   "version": "0.1.0",
   "private": false,
   "homepage": "https://hejny.github.io/3d-project",
-  "dependencies": {
-    "@types/node": "^8.0.22",
-    "babylonjs": "^3.0.1-alpha",
-    "gh-pages": "^1.0.0",
-    "gridbuilding": "^0.1.0",
-    "react-scripts-ts": "2.6.0"
-  },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
@@ -17,6 +10,20 @@
     "eject": "react-scripts-ts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deploy-from-cache": "gh-pages -d build"
+    "deploy-from-cache": "gh-pages -d build",
+    "prettier": "prettier --config .prettierrc --write \"src/**/*.{ts,tsx,css}\" webpack.config.js",
+    "prettier-watch": "onchange --initial \"**/*.{ts,tsx,css}\" -- npm run prettier"
+  },
+  "dependencies": {
+    "@types/node": "^8.0.22",
+    "babylonjs": "^3.0.1-alpha",
+    "gh-pages": "^1.0.0",
+    "gridbuilding": "^0.1.0",
+    "react-scripts-ts": "2.6.0"
+  },
+  "devDependencies":{
+    "onchange": "^5.0.2",
+    "prettier": "^1.13.7"
   }
+  
 }
