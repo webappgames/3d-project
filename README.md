@@ -1,3 +1,5 @@
+# 3D project template
+
 # `This project was made a long time ago. So expect not very updated stuff.`
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
